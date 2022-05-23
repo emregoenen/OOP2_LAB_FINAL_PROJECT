@@ -1,0 +1,1 @@
+pyuic5 -x lab_final.ui -o ui.py
