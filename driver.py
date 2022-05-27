@@ -68,9 +68,9 @@ class ImageOps:
         pass
 
     def change_label(self):
-        io.imsave("output.png", self.processed_image)
-        self.output_image = io.imread("output.png")
-        self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+        io.imsave("resources/temp/output.png", self.processed_image)
+        self.output_image = io.imread("resources/temp/output.png")
+        self.ui.label_output.setPixmap(QtGui.QPixmap("resources/temp/output.png"))
 
     def change_driver_output(self):
         self.driver.output_image = self.output_image
@@ -242,14 +242,14 @@ class Driver:
 
     def update_io_labels(self):
         if self.input_image is not None:
-            io.imsave("input.png", self.input_image)
-            self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
+            io.imsave("resources/temp/input.png", self.input_image)
+            self.ui.label_input.setPixmap(QtGui.QPixmap("resources/temp/input.png"))
         else:
             self.ui.label_input.clear()
 
         if self.output_image is not None:
-            io.imsave("output.png", self.output_image)
-            self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+            io.imsave("resources/temp/output.png", self.output_image)
+            self.ui.label_output.setPixmap(QtGui.QPixmap("resources/temp/output.png"))
         else:
             self.ui.label_output.clear()
 
@@ -317,24 +317,24 @@ class Driver:
 
     def swap_input_output(self):
         if (self.input_image is not None) and (self.output_image is not None):
-            io.imsave("output.png", self.input_image)
-            io.imsave("input.png", self.output_image)
+            io.imsave("resources/temp/output.png", self.input_image)
+            io.imsave("resources/temp/input.png", self.output_image)
             self.input_image, self.output_image = self.output_image, self.input_image
-            self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
-            self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+            self.ui.label_input.setPixmap(QtGui.QPixmap("resources/temp/input.png"))
+            self.ui.label_output.setPixmap(QtGui.QPixmap("resources/temp/output.png"))
             self.undoable_event_happened()
         elif (self.input_image is None) and (self.output_image is not None):
-            io.imsave("input.png", self.output_image)
+            io.imsave("resources/temp/input.png", self.output_image)
             self.input_image = self.output_image
             self.output_image = None
-            self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
+            self.ui.label_input.setPixmap(QtGui.QPixmap("resources/temp/input.png"))
             self.ui.label_output.clear()
             self.undoable_event_happened()
         elif (self.output_image is None) and (self.input_image is not None):
-            io.imsave("output.png", self.input_image)
+            io.imsave("resources/temp/output.png", self.input_image)
             self.output_image = self.input_image
             self.input_image = None
-            self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+            self.ui.label_output.setPixmap(QtGui.QPixmap("resources/temp/output.png"))
             self.ui.label_input.clear()
             self.undoable_event_happened()
 
