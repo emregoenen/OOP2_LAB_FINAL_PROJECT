@@ -339,7 +339,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "OOP2 Lab Final Assignment"))
         self.groupBox_3.setTitle(_translate("MainWindow", "File"))
         self.toolButton_openSource.setToolTip(_translate("MainWindow", "Open Source"))
         self.toolButton_openSource.setStatusTip(_translate("MainWindow", "Open image file (JPG or PNG)"))

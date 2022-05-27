@@ -9,7 +9,8 @@ from skimage.color import rgb2gray, rgb2hsv
 from skimage.filters import threshold_multiotsu
 import numpy as np
 from functools import partial
-
+from dataclasses import dataclass, field
+from typing import ClassVar
 
 class NotGrayError(Exception):
     pass
@@ -39,6 +40,7 @@ class ImageOps:
                 self.process_image()
                 self.change_label()
                 self.change_driver_output()
+                self.driver.undoable_event_happened()
 
     def first_check(self):
 
@@ -205,44 +207,113 @@ class Prewitt(EdgeDetection):
     def process_image(self):
         self.processed_image = filters.prewitt(self.input_image)
 
+@dataclass(order=True, frozen=True)
+class State:
+    sort_index: int = field(init=False, repr=False)
+    index: ClassVar[int] = 0
+    input_image: np.array = None
+    output_image: np.array = None
+
+    def __post_init__(self):
+        object.__setattr__(self, 'sort_index', State.index)
+        State.index = State.index + 1
 
 class Driver:
-    def __init__(self, ui):
+    def __init__(self, ui, MainWindow):
+        self.MainWindow = MainWindow
         self.ui = ui
         self.input_image = None
         self.output_image = None
         self.save_path = None
         self.setup_icons()
         self.setup_signal_slots()
+        self.MainWindow.closeEvent = self.closeEvent
+        self.undo_stack = list()
+        self.redo_stack = list()
+        self.undoable_event_happened()
 
-    def exit(self):
-        QtWidgets.QApplication.quit()
+    def undoable_event_happened(self):
+        self.undo_stack.append(State(self.input_image, self.output_image))
+        self.redo_stack.clear()
 
-    def setup_signal_slots(self):
-        self.ui.actionOpenSource.triggered.connect(self.open_source)
-        self.ui.actionSaveOutput.triggered.connect(self.save_output)
-        self.ui.actionSaveAsOutput.triggered.connect(self.save_as_output)
-        self.ui.actionExit.triggered.connect(self.exit)
-        self.ui.actionSwap.triggered.connect(self.swap_input_output)
-        self.ui.actionUndoOutput.triggered.connect(self.say_hello)
-        self.ui.actionRedoOutput.triggered.connect(self.say_hello)
-        self.ui.actionClearSource.triggered.connect(self.clear_source)
-        self.ui.actionClearOutput.triggered.connect(self.clear_output)
-        self.ui.actionRgbToGray.triggered.connect(self.rgb_to_gray)
-        self.ui.actionRgbToHsv.triggered.connect(self.rgb_to_hsv)
-        self.ui.actionMultiOtsu.triggered.connect(self.multi_otsu_thresholding)
-        self.ui.actionChanVese.triggered.connect(self.chan_vese_segmentation)
-        self.ui.actionRoberts.triggered.connect(self.roberts)
-        self.ui.actionSobel.triggered.connect(self.sobel)
-        self.ui.actionScharr.triggered.connect(self.scharr)
-        self.ui.actionPrewitt.triggered.connect(self.prewitt)
-        self.ui.actionAcwe.triggered.connect(self.morphological_snakes_ACWE)
-        self.ui.actionGac.triggered.connect(self.morphological_snakes_GAC)
+        self.check_undo_redo_buttons()
+        self.check_clear_buttons()
+        self.check_save_buttons()
+
+    def update_io_labels(self):
+        if self.input_image is not None:
+            io.imsave("input.png", self.input_image)
+            self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
+        else:
+            self.ui.label_input.clear()
+
+        if self.output_image is not None:
+            io.imsave("output.png", self.output_image)
+            self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+        else:
+            self.ui.label_output.clear()
+
+    def undo(self):
+        x = None
+        try:
+            if len(self.undo_stack) > 1:
+                x = self.undo_stack.pop()
+            else:
+                print('\a')
+        except IndexError:
+            print('\a')
+        finally:
+            if x:
+                self.redo_stack.append(x)
+                y = self.undo_stack[-1]
+                self.input_image = y.input_image
+                self.output_image = y.output_image
+                self.update_io_labels()
+                self.check_save_buttons()
+                self.check_undo_redo_buttons()
+                self.check_clear_buttons()
+
+    def redo(self):
+        x = None
+        try:
+            x = self.redo_stack.pop()
+        except IndexError:
+            print('\a')
+        finally:
+            if x:
+                self.undo_stack.append(x)
+                self.input_image = x.input_image
+                self.output_image = x.output_image
+                self.update_io_labels()
+                self.check_save_buttons()
+                self.check_undo_redo_buttons()
+                self.check_clear_buttons()
+
+    def closeEvent(self, event):
+        if self.ui.toolButton_saveOutput.isEnabled():
+            reply = QtWidgets.QMessageBox.question(self.MainWindow, 'Unsaved Changes',
+                                                   "You have unsaved changes. Do you want to save them ?", QtWidgets.QMessageBox.Yes,
+                                                   QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.Yes:
+                self.save_as_output()
+
+        reply = QtWidgets.QMessageBox.question(self.MainWindow, 'Quit',
+                                               "Are you sure to quit?", QtWidgets.QMessageBox.Yes,
+                                               QtWidgets.QMessageBox.No)
+        if reply == QtWidgets.QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
     def open_source(self):
-        fname,_ = QtWidgets.QFileDialog.getOpenFileName(filter="Image files (*.jpg *.png)")
-        self.input_image = io.imread(fname)
-        self.ui.label_input.setPixmap(QtGui.QPixmap(fname))
+        try:
+            fname,_ = QtWidgets.QFileDialog.getOpenFileName(filter="Image files (*.jpg *.png)")
+            self.input_image = io.imread(fname)
+            self.ui.label_input.setPixmap(QtGui.QPixmap(fname))
+            self.undoable_event_happened()
+        except ValueError:
+            QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning',
+                                          "Couldn't open file.")
 
     def swap_input_output(self):
         if (self.input_image is not None) and (self.output_image is not None):
@@ -251,18 +322,21 @@ class Driver:
             self.input_image, self.output_image = self.output_image, self.input_image
             self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
             self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
+            self.undoable_event_happened()
         elif (self.input_image is None) and (self.output_image is not None):
             io.imsave("input.png", self.output_image)
             self.input_image = self.output_image
             self.output_image = None
             self.ui.label_input.setPixmap(QtGui.QPixmap("input.png"))
             self.ui.label_output.clear()
+            self.undoable_event_happened()
         elif (self.output_image is None) and (self.input_image is not None):
             io.imsave("output.png", self.input_image)
             self.output_image = self.input_image
             self.input_image = None
             self.ui.label_output.setPixmap(QtGui.QPixmap("output.png"))
             self.ui.label_input.clear()
+            self.undoable_event_happened()
 
     def save_output(self):
         if self.output_image is not None:
@@ -270,8 +344,10 @@ class Driver:
                 self.save_path,_ = QtWidgets.QFileDialog.getSaveFileName(filter="Image files (*.jpg *.png)")
                 if len(self.save_path) != 0:
                     io.imsave(self.save_path, self.output_image)
+                    self.check_save_buttons()
             else:
                 io.imsave(self.save_path, self.output_image)
+                self.check_save_buttons()
         else:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before saving.')
@@ -281,17 +357,64 @@ class Driver:
             self.save_path,_ = QtWidgets.QFileDialog.getSaveFileName(filter="Image files (*.jpg *.png)")
             if len(self.save_path) != 0:
                 io.imsave(self.save_path, self.output_image)
+                self.check_save_buttons()
         else:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before saving.')
 
     def clear_source(self):
-        self.ui.label_input.clear()
-        self.input_image = None
+        if self.input_image is not None:
+            self.ui.label_input.clear()
+            self.input_image = None
+            self.undoable_event_happened()
 
     def clear_output(self):
-        self.ui.label_output.clear()
-        self.output_image = None
+        if self.input_image is not None:
+            self.ui.label_output.clear()
+            self.output_image = None
+            self.undoable_event_happened()
+
+    def check_save_buttons(self):
+        if self.output_image is not None:
+            self.ui.toolButton_saveOutput.setEnabled(True)
+            self.ui.toolButton_saveAsOutput.setEnabled(True)
+            self.ui.actionSaveOutput.setEnabled(True)
+            self.ui.actionSaveAsOutput.setEnabled(True)
+        else:
+            self.ui.toolButton_saveOutput.setEnabled(False)
+            self.ui.toolButton_saveAsOutput.setEnabled(False)
+            self.ui.actionSaveOutput.setEnabled(False)
+            self.ui.actionSaveAsOutput.setEnabled(False)
+
+    def check_clear_buttons(self):
+        if self.input_image is not None:
+            self.ui.toolButton_clearSource.setEnabled(True)
+            self.ui.actionClearSource.setEnabled(True)
+        else:
+            self.ui.toolButton_clearSource.setEnabled(False)
+            self.ui.actionClearSource.setEnabled(False)
+
+        if self.output_image is not None:
+            self.ui.toolButton_clearOutput.setEnabled(True)
+            self.ui.actionClearOutput.setEnabled(True)
+        else:
+            self.ui.toolButton_clearOutput.setEnabled(False)
+            self.ui.actionClearOutput.setEnabled(False)
+
+    def check_undo_redo_buttons(self):
+        if len(self.undo_stack) > 1:
+            self.ui.toolButton_undoOutput.setEnabled(True)
+            self.ui.actionUndoOutput.setEnabled(True)
+        else:
+            self.ui.toolButton_undoOutput.setEnabled(False)
+            self.ui.actionUndoOutput.setEnabled(False)
+
+        if len(self.redo_stack) > 0:
+            self.ui.toolButton_redoOutput.setEnabled(True)
+            self.ui.actionRedoOutput.setEnabled(True)
+        else:
+            self.ui.toolButton_redoOutput.setEnabled(False)
+            self.ui.actionRedoOutput.setEnabled(False)
 
     def rgb_to_gray(self):
         RgbToGray(self.ui, self.input_image, self)
@@ -326,7 +449,25 @@ class Driver:
     def say_hello(self):
         print("HELLO THERE !")
 
+    def exit(self):
+
+        if self.ui.toolButton_saveOutput.isEnabled():
+            reply = QtWidgets.QMessageBox.question(self.MainWindow, 'Unsaved Changes',
+                                                   "You have unsaved changes. Do you want to save them ?", QtWidgets.QMessageBox.Yes,
+                                                   QtWidgets.QMessageBox.No)
+            if reply == QtWidgets.QMessageBox.Yes:
+                self.save_as_output()
+
+        reply = QtWidgets.QMessageBox.question(self.MainWindow, 'Quit',
+                                               "Are you sure to quit?", QtWidgets.QMessageBox.Yes,
+                                               QtWidgets.QMessageBox.No)
+
+        if reply == QtWidgets.QMessageBox.Yes:
+            QtWidgets.QApplication.quit()
+
     def setup_icons(self):
+        self.MainWindow.setWindowIcon(QtGui.QIcon("resources/icons/main_window_2.png"))
+
         self.ui.toolButton_openSource.setIcon(QtGui.QIcon("resources/icons/open.png"))
         self.ui.toolButton_saveOutput.setIcon(QtGui.QIcon("resources/icons/save.png"))
         self.ui.toolButton_saveAsOutput.setIcon(QtGui.QIcon("resources/icons/saveas.png"))
@@ -368,3 +509,24 @@ class Driver:
         self.ui.actionGac.setIcon(QtGui.QIcon("resources/icons/gac.png"))
 
         self.ui.menuClear.setIcon(QtGui.QIcon("resources/icons/clear.png"))
+
+    def setup_signal_slots(self):
+        self.ui.actionOpenSource.triggered.connect(self.open_source)
+        self.ui.actionSaveOutput.triggered.connect(self.save_output)
+        self.ui.actionSaveAsOutput.triggered.connect(self.save_as_output)
+        self.ui.actionExit.triggered.connect(self.exit)
+        self.ui.actionSwap.triggered.connect(self.swap_input_output)
+        self.ui.actionUndoOutput.triggered.connect(self.undo)
+        self.ui.actionRedoOutput.triggered.connect(self.redo)
+        self.ui.actionClearSource.triggered.connect(self.clear_source)
+        self.ui.actionClearOutput.triggered.connect(self.clear_output)
+        self.ui.actionRgbToGray.triggered.connect(self.rgb_to_gray)
+        self.ui.actionRgbToHsv.triggered.connect(self.rgb_to_hsv)
+        self.ui.actionMultiOtsu.triggered.connect(self.multi_otsu_thresholding)
+        self.ui.actionChanVese.triggered.connect(self.chan_vese_segmentation)
+        self.ui.actionRoberts.triggered.connect(self.roberts)
+        self.ui.actionSobel.triggered.connect(self.sobel)
+        self.ui.actionScharr.triggered.connect(self.scharr)
+        self.ui.actionPrewitt.triggered.connect(self.prewitt)
+        self.ui.actionAcwe.triggered.connect(self.morphological_snakes_ACWE)
+        self.ui.actionGac.triggered.connect(self.morphological_snakes_GAC)
