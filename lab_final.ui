@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1328</width>
     <height>720</height>
    </rect>
   </property>
@@ -90,6 +90,44 @@
             </property>
             <property name="statusTip">
              <string>Save output to another location with different extension</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_exportAsSource">
+            <property name="toolTip">
+             <string>Export As Source</string>
+            </property>
+            <property name="statusTip">
+             <string>Export as source</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="toolButton_exportAsOutput">
+            <property name="toolTip">
+             <string>Export As Output</string>
+            </property>
+            <property name="statusTip">
+             <string>Export as output</string>
             </property>
             <property name="text">
              <string/>
@@ -571,7 +609,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1280</width>
+     <width>1328</width>
      <height>21</height>
     </rect>
    </property>
@@ -579,9 +617,23 @@
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuExport_As">
+     <property name="toolTip">
+      <string>Export As</string>
+     </property>
+     <property name="statusTip">
+      <string>Export As</string>
+     </property>
+     <property name="title">
+      <string>Export As</string>
+     </property>
+     <addaction name="actionExportAsSource"/>
+     <addaction name="actionExportAsOutput"/>
+    </widget>
     <addaction name="actionOpenSource"/>
     <addaction name="actionSaveOutput"/>
     <addaction name="actionSaveAsOutput"/>
+    <addaction name="menuExport_As"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -590,7 +642,7 @@
     </property>
     <widget class="QMenu" name="menuClear">
      <property name="toolTip">
-      <string>Undo</string>
+      <string>Clear</string>
      </property>
      <property name="statusTip">
       <string>Undo changes</string>
@@ -659,8 +711,10 @@
    </attribute>
    <addaction name="actionRgbToGray"/>
    <addaction name="actionRgbToHsv"/>
+   <addaction name="separator"/>
    <addaction name="actionMultiOtsu"/>
    <addaction name="actionChanVese"/>
+   <addaction name="separator"/>
    <addaction name="actionRoberts"/>
    <addaction name="actionSobel"/>
    <addaction name="actionScharr"/>
@@ -679,12 +733,19 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpenSource"/>
+   <addaction name="separator"/>
    <addaction name="actionSaveOutput"/>
    <addaction name="actionSaveAsOutput"/>
+   <addaction name="separator"/>
+   <addaction name="actionExportAsSource"/>
+   <addaction name="actionExportAsOutput"/>
+   <addaction name="separator"/>
    <addaction name="actionClearSource"/>
    <addaction name="actionClearOutput"/>
+   <addaction name="separator"/>
    <addaction name="actionUndoOutput"/>
    <addaction name="actionRedoOutput"/>
+   <addaction name="separator"/>
    <addaction name="actionExit"/>
   </widget>
   <action name="actionOpenSource">
@@ -739,10 +800,22 @@
    <property name="text">
     <string>Source</string>
    </property>
+   <property name="toolTip">
+    <string>Clear Source</string>
+   </property>
+   <property name="statusTip">
+    <string>Clear source</string>
+   </property>
   </action>
   <action name="actionClearOutput">
    <property name="text">
     <string>Output</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear Output</string>
+   </property>
+   <property name="statusTip">
+    <string>Clear output</string>
    </property>
   </action>
   <action name="actionRgbToGray">
@@ -798,6 +871,28 @@
   <action name="actionSwap">
    <property name="text">
     <string>Swap</string>
+   </property>
+  </action>
+  <action name="actionExportAsSource">
+   <property name="text">
+    <string>Source</string>
+   </property>
+   <property name="toolTip">
+    <string>Export As Source</string>
+   </property>
+   <property name="statusTip">
+    <string>Export as source</string>
+   </property>
+  </action>
+  <action name="actionExportAsOutput">
+   <property name="text">
+    <string>Output</string>
+   </property>
+   <property name="toolTip">
+    <string>Export As Output</string>
+   </property>
+   <property name="statusTip">
+    <string>Export as output</string>
    </property>
   </action>
  </widget>
@@ -1100,6 +1195,38 @@
     <hint type="sourcelabel">
      <x>228</x>
      <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_exportAsOutput</sender>
+   <signal>clicked()</signal>
+   <receiver>actionExportAsOutput</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_exportAsSource</sender>
+   <signal>clicked()</signal>
+   <receiver>actionExportAsSource</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>81</y>
     </hint>
     <hint type="destinationlabel">
      <x>-1</x>
