@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['actionacwe_0',['actionAcwe',['../classui_1_1_ui___main_window.html#ace7b06deab3033504234f9eae934ad87',1,'ui::Ui_MainWindow']]],
+  ['actionchanvese_1',['actionChanVese',['../classui_1_1_ui___main_window.html#a04aa34f7dc190660a694ba12390bef7d',1,'ui::Ui_MainWindow']]],
+  ['actionclearoutput_2',['actionClearOutput',['../classui_1_1_ui___main_window.html#a36d1afc13118273c172d973a96354ac0',1,'ui::Ui_MainWindow']]],
+  ['actionclearsource_3',['actionClearSource',['../classui_1_1_ui___main_window.html#a432724c302bf095fba0109ee32bb67de',1,'ui::Ui_MainWindow']]],
+  ['actionexit_4',['actionExit',['../classui_1_1_ui___main_window.html#a86b14fb84af60b375203c4754b090733',1,'ui::Ui_MainWindow']]],
+  ['actionexportasoutput_5',['actionExportAsOutput',['../classui_1_1_ui___main_window.html#a800c4eca2e5b342fb431d067af6a206f',1,'ui::Ui_MainWindow']]],
+  ['actionexportassource_6',['actionExportAsSource',['../classui_1_1_ui___main_window.html#ac3e2606652c84436c7b105ddd6265db4',1,'ui::Ui_MainWindow']]],
+  ['actiongac_7',['actionGac',['../classui_1_1_ui___main_window.html#a95fb037691770c892909d15f7bce1d0d',1,'ui::Ui_MainWindow']]],
+  ['actionmultiotsu_8',['actionMultiOtsu',['../classui_1_1_ui___main_window.html#a317e040eb48e68206837ec65c5826637',1,'ui::Ui_MainWindow']]],
+  ['actionopensource_9',['actionOpenSource',['../classui_1_1_ui___main_window.html#acac90c3d02fc12764887e504dee69b55',1,'ui::Ui_MainWindow']]],
+  ['actionprewitt_10',['actionPrewitt',['../classui_1_1_ui___main_window.html#a243afcf09a594bd1e3aa17027d9f0d61',1,'ui::Ui_MainWindow']]],
+  ['actionredooutput_11',['actionRedoOutput',['../classui_1_1_ui___main_window.html#af91140adb25218e7a016161f217eb21f',1,'ui::Ui_MainWindow']]],
+  ['actionrgbtogray_12',['actionRgbToGray',['../classui_1_1_ui___main_window.html#adf2fffbb4b587fcee2c25f3df43d0f84',1,'ui::Ui_MainWindow']]],
+  ['actionrgbtohsv_13',['actionRgbToHsv',['../classui_1_1_ui___main_window.html#a0de09e502a314b88d375a5a47262ebe4',1,'ui::Ui_MainWindow']]],
+  ['actionroberts_14',['actionRoberts',['../classui_1_1_ui___main_window.html#a786b03c1b0da648bec3cf4284ad0fc6e',1,'ui::Ui_MainWindow']]],
+  ['actionsaveasoutput_15',['actionSaveAsOutput',['../classui_1_1_ui___main_window.html#a01baa80cb495080cf9dc320de2845e55',1,'ui::Ui_MainWindow']]],
+  ['actionsaveoutput_16',['actionSaveOutput',['../classui_1_1_ui___main_window.html#a80e6637d9d821fd24084eb40570dd75a',1,'ui::Ui_MainWindow']]],
+  ['actionscharr_17',['actionScharr',['../classui_1_1_ui___main_window.html#a95482ae4d52e9c889c2e80582a4ed1c6',1,'ui::Ui_MainWindow']]],
+  ['actionsobel_18',['actionSobel',['../classui_1_1_ui___main_window.html#a869cb59e2d99e87b1d41eb06f2902cef',1,'ui::Ui_MainWindow']]],
+  ['actionswap_19',['actionSwap',['../classui_1_1_ui___main_window.html#a7754e4cf251df83f7b8c65a42dca9bf8',1,'ui::Ui_MainWindow']]],
+  ['actionundooutput_20',['actionUndoOutput',['../classui_1_1_ui___main_window.html#a3d3f69f9877b99c072b327a51de55a09',1,'ui::Ui_MainWindow']]],
+  ['app_21',['app',['../namespacemain.html#a5fa94f0581009434c7a63791944d6ff4',1,'main.app()'],['../namespaceui.html#aa319e24d35c85648c0d34ea8d6c77912',1,'ui.app()']]],
+  ['array_22',['array',['../classdriver_1_1_state.html#a31c7549ad930c50cff6c747e55c1697c',1,'driver::State']]]
+];

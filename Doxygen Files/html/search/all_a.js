@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['main_0',['main',['../namespacemain.html',1,'']]],
+  ['main_2epy_1',['main.py',['../main_8py.html',1,'']]],
+  ['mainwindow_2',['MainWindow',['../classdriver_1_1_driver.html#a88fab3f3493eca62ac384baa55b66712',1,'driver.Driver.MainWindow()'],['../namespacemain.html#a1f2de373aedaf87b4c55340f8557956a',1,'main.MainWindow()'],['../namespaceui.html#a003cd0afd837d549701c170967632997',1,'ui.MainWindow()']]],
+  ['menubar_3',['menubar',['../classui_1_1_ui___main_window.html#afed9de5b6cc8571fd997f6a7660a8b68',1,'ui::Ui_MainWindow']]],
+  ['menuclear_4',['menuClear',['../classui_1_1_ui___main_window.html#a1a744afd2ece03feda2934fea2609567',1,'ui::Ui_MainWindow']]],
+  ['menuconversion_5',['menuConversion',['../classui_1_1_ui___main_window.html#aa60397f88a3ce89cd43d27ea9a573947',1,'ui::Ui_MainWindow']]],
+  ['menuedge_5fdetection_5fmenu_6',['menuEdge_Detection_Menu',['../classui_1_1_ui___main_window.html#a080e3aaacf966dd08e79d30befd509ad',1,'ui::Ui_MainWindow']]],
+  ['menuedit_7',['menuEdit',['../classui_1_1_ui___main_window.html#a1361727ee5a5fedcbf0f641fd90df1e9',1,'ui::Ui_MainWindow']]],
+  ['menuexport_5fas_8',['menuExport_As',['../classui_1_1_ui___main_window.html#a16cc93fe27f6d3c431c0ea3bff6d75b5',1,'ui::Ui_MainWindow']]],
+  ['menufile_9',['menuFile',['../classui_1_1_ui___main_window.html#a32318bdc9dd8e8f80edd1329d6de8782',1,'ui::Ui_MainWindow']]],
+  ['menumorphological_5fsnakes_10',['menuMorphological_Snakes',['../classui_1_1_ui___main_window.html#aa06800ee99115d0eb11d3d52481c352c',1,'ui::Ui_MainWindow']]],
+  ['menusegmentation_11',['menuSegmentation',['../classui_1_1_ui___main_window.html#ad21409126ed9abca12a21950e32e2744',1,'ui::Ui_MainWindow']]],
+  ['morphacwe_12',['MorphACWE',['../classimage__operations_1_1_morph_a_c_w_e.html',1,'image_operations']]],
+  ['morphgac_13',['MorphGAC',['../classimage__operations_1_1_morph_g_a_c.html',1,'image_operations']]],
+  ['morphological_5fsnakes_5facwe_14',['morphological_snakes_ACWE',['../classdriver_1_1_driver.html#a978aa2c0d17260b32825e2dec8df42ea',1,'driver::Driver']]],
+  ['morphological_5fsnakes_5fgac_15',['morphological_snakes_GAC',['../classdriver_1_1_driver.html#a030d5fb5019eae2d16901977c982c880',1,'driver::Driver']]],
+  ['morphsnakes_16',['MorphSnakes',['../classimage__operations_1_1_morph_snakes.html',1,'image_operations']]],
+  ['multi_5fotsu_5fthresholding_17',['multi_otsu_thresholding',['../classdriver_1_1_driver.html#a444132ef10180dccdbd32fa71ff5a90c',1,'driver::Driver']]],
+  ['multiotsu_18',['MultiOtsu',['../classimage__operations_1_1_multi_otsu.html',1,'image_operations']]]
+];

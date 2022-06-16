@@ -1,212 +1,20 @@
+## @package driver
+#  Documentation for this module.
+#
+#  More details.
+
 from PyQt5 import QtGui, QtWidgets
-from skimage import io, img_as_float, filters
-from skimage.segmentation import chan_vese
-from skimage.segmentation import (morphological_chan_vese,
-                                  morphological_geodesic_active_contour,
-                                  inverse_gaussian_gradient,
-                                  checkerboard_level_set)
-from skimage.color import rgb2gray, rgb2hsv
-from skimage.filters import threshold_multiotsu
+from skimage import io
 import numpy as np
-from functools import partial
 from dataclasses import dataclass, field
 from typing import ClassVar
-
-class NotGrayError(Exception):
-    pass
+from image_operations import RgbToGray, RgbToHsv, MultiOtsu, ChanVese, MorphACWE, MorphGAC, Roberts, Sobel, Scharr, Prewitt
 
 
-class NotRgbError(Exception):
-    pass
-
-
-class ImageOps:
-    def __init__(self, ui, image, driver):
-        self.input_image = image
-        self.ui = ui
-        self.driver = driver
-        self.processed_image = None
-        self.output_image = None
-
-        # YOU CAN DELETE HERE (OR IF YOU WANT TO HANDLE RGBA IMAGES TRY TO ACHIEVE IT)
-        # print(self.input_image)
-        # if self.input_image.shape[2] == 4:
-        #     self.input_image, sliced_part = self.input_image[:,:,:-1], self.input_image[:,:,-1] # RGBA TO RGB
-        #     print(self.input_image)
-        #     print(sliced_part)
-
-        if self.first_check():
-            if self.check_compatibility():
-                self.process_image()
-                self.change_label()
-                self.change_driver_output()
-                self.driver.undoable_event_happened()
-
-    def first_check(self):
-
-        if np.ndim(self.input_image) == 3:
-            if self.input_image.shape[2] == 4:
-                QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - RGBA Detected',
-                                              'Cannot handle RGBA images right now. You must open a RGB or a grayscale image as input !')
-                return False
-            elif self.input_image.shape[2] == 3:
-                return True
-            else:
-                QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Unknown image type',
-                                              'You must open a RGB or a grayscale image as input !')
-        elif np.ndim(self.input_image) == 2:
-            if len(self.input_image.shape) != 2:
-                QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Not 2d grayscale image',
-                                              'This program can only convert 2D grayscale arrays !')
-            else:
-                return True
-
-    def check_compatibility(self): # Override this function
-        pass
-
-    def process_image(self): # Override this function
-        pass
-
-    def change_label(self):
-        io.imsave("resources/temp/output.png", self.processed_image)
-        self.output_image = io.imread("resources/temp/output.png")
-        self.ui.label_output.setPixmap(QtGui.QPixmap("resources/temp/output.png"))
-
-    def change_driver_output(self):
-        self.driver.output_image = self.output_image
-
-
-class Conversion(ImageOps):
-    def __init__(self, ui, image, driver):
-        super().__init__(ui, image, driver)
-
-    def check_compatibility(self):
-        if np.ndim(self.input_image) != 3: # Not RGB
-            QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - NOT RGB', 'You must open a RGB image as input !')
-            return False
-        else:
-            return True
-
-
-class RgbToGray(Conversion):
-
-    def process_image(self):
-        self.processed_image = rgb2gray(self.input_image)
-
-
-class RgbToHsv(Conversion):
-
-    def process_image(self):
-        self.processed_image = rgb2hsv(self.input_image)
-
-
-class Segmentation(ImageOps):
-    def __init__(self, ui, image, driver):
-        super().__init__(ui, image, driver)
-
-    def check_compatibility(self):
-        if np.ndim(self.input_image) != 2: # Not GRAY
-            QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - NOT GRAYSCALE', 'You must open a grayscale image as input !')
-            return False
-        else:
-            return True
-
-
-class MultiOtsu(Segmentation):
-
-    def process_image(self):
-        thresholds = threshold_multiotsu(self.input_image)
-        # Using the threshold values, we generate the three regions.
-        regions = np.digitize(self.input_image, bins=thresholds)
-        # plot output in 'jet'
-        self.processed_image = regions
-
-
-class ChanVese(Segmentation):
-    def process_image(self):
-        image = img_as_float(self.input_image)
-        # Feel free to play around with the parameters to see how they impact the result
-        cv = chan_vese(image, mu=0.25, lambda1=1, lambda2=1, tol=1e-3,
-                       max_num_iter=200, dt=0.5, init_level_set="checkerboard",
-                       extended_output=True)
-        # input is gray and also plot output in grayscale
-        self.processed_image = cv[0]
-
-
-class MorphSnakes(Segmentation):
-    def store_evolution_in(self, lst):
-        """Returns a callback function to store the evolution of the level sets in
-        the given list.
-        """
-
-        def _store(x):
-            lst.append(np.copy(x))
-
-        return _store
-
-
-class MorphACWE(MorphSnakes):
-    def process_image(self):
-        image = img_as_float(self.input_image)
-
-        # Initial level set
-        init_ls = checkerboard_level_set(image.shape, 6)
-        # List with intermediate results for plotting the evolution
-        evolution = []
-        callback = self.store_evolution_in(evolution)
-        self.processed_image = morphological_chan_vese(image, num_iter=35, init_level_set=init_ls,
-                                     smoothing=3, iter_callback=callback)
-
-
-class MorphGAC(MorphSnakes):
-    def process_image(self):
-        image = img_as_float(self.input_image)
-        gimage = inverse_gaussian_gradient(image)
-
-        # Initial level set
-        init_ls = np.zeros(image.shape, dtype=np.int8)
-        init_ls[10:-10, 10:-10] = 1
-        # List with intermediate results for plotting the evolution
-        evolution = []
-        callback = self.store_evolution_in(evolution)
-        self.processed_image = morphological_geodesic_active_contour(gimage, num_iter=230,
-                                                   init_level_set=init_ls,
-                                                   smoothing=1, balloon=-1,
-                                                   threshold=0.69,
-                                                   iter_callback=callback)
-
-
-class EdgeDetection(ImageOps):
-    def __init__(self, ui, image, driver):
-        super().__init__(ui, image, driver)
-
-    def check_compatibility(self):
-        if np.ndim(self.input_image) != 2: # Not GRAY
-            QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - NOT GRAYSCALE', 'You must open a grayscale image as input !')
-            return False
-        else:
-            return True
-
-
-class Roberts(EdgeDetection):
-    def process_image(self):
-        self.processed_image = filters.roberts(self.input_image)
-
-
-class Sobel(EdgeDetection):
-    def process_image(self):
-        self.processed_image = filters.sobel(self.input_image)
-
-
-class Scharr(EdgeDetection):
-    def process_image(self):
-        self.processed_image = filters.scharr(self.input_image)
-
-
-class Prewitt(EdgeDetection):
-    def process_image(self):
-        self.processed_image = filters.prewitt(self.input_image)
-
+## dataclass for holding states of the program
+#  When undoable event occurs, the programs current state is saved.
+#  When undo() is invoked, program is set to previous state
+#  When redo() is invoked, program is set to next state
 @dataclass(order=True, frozen=True)
 class State:
     sort_index: int = field(init=False, repr=False)
@@ -218,7 +26,8 @@ class State:
         object.__setattr__(self, 'sort_index', State.index)
         State.index = State.index + 1
 
-
+## Driver for MainWindow
+#  This class should be created once(singleton)
 class Driver:
     def __init__(self, ui, MainWindow):
         self.MainWindow = MainWindow
@@ -235,6 +44,7 @@ class Driver:
         self.file_extension = None
         self.file_types = {"*.jpg", "*.png"}
 
+    ## Open input image (*.jpg, *.png)
     def open_source(self):
         try:
             fname,_ = QtWidgets.QFileDialog.getOpenFileName(filter="Image files (*.jpg *.png)")
@@ -247,6 +57,11 @@ class Driver:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning',
                                           "Couldn't open file.")
 
+
+    ## Save output image at current save path(*.jpg, *.png)
+    #  If not saved before, opens a dialog window, expecting user to select save path
+    #  If saved before, takes save path as previous one
+    #  Save output image as *.png or *.jpg
     def save_output(self):
         if self.output_image is not None:
             if (self.save_path is None) or (len(self.save_path) == 0):
@@ -261,6 +76,11 @@ class Driver:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before saving.')
 
+
+
+    # Opens a dialog window, expecting user to select save path
+    # Save output image as *.png or *.jpg
+
     def save_as_output(self):
         if self.output_image is not None:
             self.save_path,_ = QtWidgets.QFileDialog.getSaveFileName(filter="Image files (*.jpg *.png)")
@@ -271,6 +91,10 @@ class Driver:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before saving.')
 
+
+    ## Opens a dialog window, expecting user to select save path
+    #  If the input file is JPEG, save input label (image box on the left) with extension *.png
+    #  If the input file is PNG, save input label (image box on the left) with extension *.jpg
     def export_as_source(self):
         if self.input_image is not None:
             filter_str = "Image files ("
@@ -284,6 +108,10 @@ class Driver:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before exporting.')
 
+
+    ## Opens a dialog window, expecting user to select save path
+    #  If the input file is JPEG, save output label (image box on the right) with extension *.png
+    #  If the input file is PNG, save output label (image box on the right) with extension *.jpg
     def export_as_output(self):
         if self.output_image is not None:
             filter_str = "Image files ("
@@ -297,6 +125,9 @@ class Driver:
             QtWidgets.QMessageBox.warning(QtWidgets.QDialog(), 'Warning - Output is empty',
                                           'You must process input image before exporting.')
 
+
+    ## Pop the previous state from undo stack and push it to the redo stack
+    #  Then, set the program's state to top of undo stack
     def undo(self):
         x = None
         try:
@@ -320,6 +151,8 @@ class Driver:
                 self.check_swap_button()
                 self.check_export_as_buttons()
 
+    ## Pop from the top of redo stack, then push it to the undo stack
+    #  Set the current state of the program to popped state
     def redo(self):
         x = None
         try:
@@ -339,6 +172,9 @@ class Driver:
                 self.check_swap_button()
                 self.check_export_as_buttons()
 
+    ## Undoable event happened
+    #  Save the current state of the program and push it to undo stack
+    #  Clear the redo stack
     def undoable_event_happened(self):
         self.undo_stack.append(State(self.input_image, self.output_image))
         self.redo_stack.clear()
@@ -350,6 +186,7 @@ class Driver:
         self.check_swap_button()
         self.check_export_as_buttons()
 
+    ## Update input and output files from /temp folder
     def update_io_labels(self):
         if self.input_image is not None:
             io.imsave("resources/temp/input.png", self.input_image)
@@ -363,6 +200,7 @@ class Driver:
         else:
             self.ui.label_output.clear()
 
+    ## Swap input and output images, update input output labels
     def swap_input_output(self):
         if (self.input_image is not None) and (self.output_image is not None):
             io.imsave("resources/temp/output.png", self.input_image)
@@ -386,18 +224,21 @@ class Driver:
             self.ui.label_input.clear()
             self.undoable_event_happened()
 
+    ## Clear the input image and label
     def clear_source(self):
         if self.input_image is not None:
             self.ui.label_input.clear()
             self.input_image = None
             self.undoable_event_happened()
 
+    ## Clear the output image and label
     def clear_output(self):
         if self.output_image is not None:
             self.ui.label_output.clear()
             self.output_image = None
             self.undoable_event_happened()
 
+    ## Enable disable check of export as buttons
     def check_export_as_buttons(self):
         if self.input_image is not None:
             self.ui.toolButton_exportAsSource.setEnabled(True)
@@ -413,6 +254,7 @@ class Driver:
             self.ui.toolButton_exportAsOutput.setEnabled(False)
             self.ui.actionExportAsOutput.setEnabled(False)
 
+    ## Enable disable check of save button
     def check_save_buttons(self):
         if self.output_image is not None:
             self.ui.toolButton_saveOutput.setEnabled(True)
@@ -425,6 +267,7 @@ class Driver:
             self.ui.actionSaveOutput.setEnabled(False)
             self.ui.actionSaveAsOutput.setEnabled(False)
 
+    ## Enable disable check of clear button
     def check_clear_buttons(self):
         if self.input_image is not None:
             self.ui.toolButton_clearSource.setEnabled(True)
@@ -440,6 +283,7 @@ class Driver:
             self.ui.toolButton_clearOutput.setEnabled(False)
             self.ui.actionClearOutput.setEnabled(False)
 
+    ## Enable disable check of undo redo buttons
     def check_undo_redo_buttons(self):
         if len(self.undo_stack) > 1:
             self.ui.toolButton_undoOutput.setEnabled(True)
@@ -455,6 +299,7 @@ class Driver:
             self.ui.toolButton_redoOutput.setEnabled(False)
             self.ui.actionRedoOutput.setEnabled(False)
 
+    ## Enable disable check of swap button
     def check_swap_button(self):
         if self.input_image is not None or self.output_image is not None:
             self.ui.toolButton_swap.setEnabled(True)
@@ -463,6 +308,7 @@ class Driver:
             self.ui.toolButton_swap.setEnabled(False)
             self.ui.actionSwap.setEnabled(False)
 
+    ## Enable disable check of image processing buttons
     def check_functionality_buttons(self):
         if self.input_image is not None:
             self.ui.toolButton_rgbToGray.setEnabled(True)
@@ -507,39 +353,51 @@ class Driver:
             self.ui.actionAcwe.setEnabled(False)
             self.ui.actionGac.setEnabled(False)
 
+
+    ## Convert RGB image to grayscale image
     def rgb_to_gray(self):
         RgbToGray(self.ui, self.input_image, self)
 
+    ## Convert RGB image to HSV
     def rgb_to_hsv(self):
         RgbToHsv(self.ui, self.input_image, self)
 
-    def multi_otsu_thresholding(self): # USE THIS METHOD FOR ONLY GRAYSCALE IMAGES
+    ## Apply MultiOtsu segmentation to image
+    def multi_otsu_thresholding(self):
         MultiOtsu(self.ui, self.input_image, self)
 
+    ## Apply ChanVese segmentation to image
     def chan_vese_segmentation(self):
         ChanVese(self.ui, self.input_image, self)
 
+    ## Apply MorphSnakes(GAC) segmentation to image
     def morphological_snakes_GAC(self):
         MorphGAC(self.ui, self.input_image, self)
 
+    ## Apply MorphSnakes(ACWE) segmentation to image
     def morphological_snakes_ACWE(self):
         MorphACWE(self.ui, self.input_image, self)
 
+    ## Apply Roberts Edge Detection to image
     def roberts(self):
         Roberts(self.ui, self.input_image, self)
 
+    ## Apply Sobel Edge Detection to image
     def sobel(self):
         Sobel(self.ui, self.input_image, self)
 
+    ## Apply Scharr Edge Detection to image
     def scharr(self):
         Scharr(self.ui, self.input_image, self)
 
+    ## Apply Prewitt Edge Detection to image
     def prewitt(self):
         Prewitt(self.ui, self.input_image, self)
 
-    def say_hello(self):
-        print("HELLO THERE !")
-
+    ## If user presses the red exit button on the top right
+    #  If there are unsaved changes ask him to whether he wants to save them
+    #  Then ask "Are you sure to quit"
+    #  If answer is "Yes" quit, if not do nothing.
     def closeEvent(self, event):
         if self.ui.toolButton_saveOutput.isEnabled():
             reply = QtWidgets.QMessageBox.question(self.MainWindow, 'Unsaved Changes',
@@ -556,6 +414,11 @@ class Driver:
         else:
             event.ignore()
 
+    ## Terminate the program
+    ## If user presses the exit button
+    #  If there are unsaved changes ask him to whether he wants to save them
+    #  Then ask "Are you sure to quit"
+    #  If answer is "Yes" quit, if not do nothing.
     def exit(self):
 
         if self.ui.toolButton_saveOutput.isEnabled():
@@ -572,6 +435,8 @@ class Driver:
         if reply == QtWidgets.QMessageBox.Yes:
             QtWidgets.QApplication.quit()
 
+
+    ## Put icons on buttons
     def setup_icons(self):
         self.MainWindow.setWindowIcon(QtGui.QIcon("resources/icons/main_window_2.png"))
 
@@ -621,6 +486,7 @@ class Driver:
 
         self.ui.menuClear.setIcon(QtGui.QIcon("resources/icons/clear.png"))
 
+    ## Connect signals with slots
     def setup_signal_slots(self):
         self.ui.actionOpenSource.triggered.connect(self.open_source)
         self.ui.actionSaveOutput.triggered.connect(self.save_output)

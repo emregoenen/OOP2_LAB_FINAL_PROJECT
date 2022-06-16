@@ -1,0 +1,165 @@
+\hypertarget{classimage__operations_1_1_image_ops}{}\doxysection{image\+\_\+operations.\+Image\+Ops Class Reference}
+\label{classimage__operations_1_1_image_ops}\index{image\_operations.ImageOps@{image\_operations.ImageOps}}
+
+
+Base class for image processing algorithms.  
+
+
+Inheritance diagram for image\+\_\+operations.\+Image\+Ops\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.731707cm]{classimage__operations_1_1_image_ops}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_a87c000a21fa59be3328ed2284c4f2723}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classimage__operations_1_1_image_ops_ad75dc1fc2e2d963363f7a6482624e58d}{ui}}, image, \mbox{\hyperlink{classimage__operations_1_1_image_ops_acd95c28753c346411f916c817cc99c34}{driver}})
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_a4a1e62498f125629eafd834987c5ae7a}{first\+\_\+check}} (self)
+\begin{DoxyCompactList}\small\item\em First check if image is compatible with image processing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_aa709bfb2cfefc8bc2b936265d78ca493}{check\+\_\+compatibility}} (self)
+\begin{DoxyCompactList}\small\item\em Second check for image compatibility Override this function. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_ab692b77bfc8cb25f1fd88f96799cfd2e}{process\+\_\+image}} (self)
+\begin{DoxyCompactList}\small\item\em Image processing is done here Override this function. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_a819b2aa952f73cba3f2adfbc72c659d8}{change\+\_\+label}} (self)
+\begin{DoxyCompactList}\small\item\em Change the output display with processed image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classimage__operations_1_1_image_ops_a688987c20f5b337321fba416dba0c3f9}{change\+\_\+driver\+\_\+output}} (self)
+\begin{DoxyCompactList}\small\item\em Change the driver\textquotesingle{}s output\+\_\+image attribute with processed image. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classimage__operations_1_1_image_ops_a1706c80d3fddee549d1034d361ce3ce6}{input\+\_\+image}}
+\item 
+\mbox{\hyperlink{classimage__operations_1_1_image_ops_ad75dc1fc2e2d963363f7a6482624e58d}{ui}}
+\item 
+\mbox{\hyperlink{classimage__operations_1_1_image_ops_acd95c28753c346411f916c817cc99c34}{driver}}
+\item 
+\mbox{\hyperlink{classimage__operations_1_1_image_ops_acce9a6d09196be714c37a595bdab190a}{processed\+\_\+image}}
+\item 
+\mbox{\hyperlink{classimage__operations_1_1_image_ops_afbe235794c301d19aebd02b41adc2787}{output\+\_\+image}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for image processing algorithms. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_a87c000a21fa59be3328ed2284c4f2723}\label{classimage__operations_1_1_image_ops_a87c000a21fa59be3328ed2284c4f2723}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ui,  }\item[{}]{image,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & The input image to image processing \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classimage__operations_1_1_conversion_ab37a3e5fca5094683688a181537ac6f3}{image\+\_\+operations.\+Conversion}}, \mbox{\hyperlink{classimage__operations_1_1_segmentation_adfa8fb661361c21a887489123fb4de93}{image\+\_\+operations.\+Segmentation}}, and \mbox{\hyperlink{classimage__operations_1_1_edge_detection_a03f1f3b26eb656b5b3d3c02f2f3853b6}{image\+\_\+operations.\+Edge\+Detection}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_a688987c20f5b337321fba416dba0c3f9}\label{classimage__operations_1_1_image_ops_a688987c20f5b337321fba416dba0c3f9}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!change\_driver\_output@{change\_driver\_output}}
+\index{change\_driver\_output@{change\_driver\_output}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{change\_driver\_output()}{change\_driver\_output()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+change\+\_\+driver\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Change the driver\textquotesingle{}s output\+\_\+image attribute with processed image. 
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_a819b2aa952f73cba3f2adfbc72c659d8}\label{classimage__operations_1_1_image_ops_a819b2aa952f73cba3f2adfbc72c659d8}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!change\_label@{change\_label}}
+\index{change\_label@{change\_label}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{change\_label()}{change\_label()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+change\+\_\+label (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Change the output display with processed image. 
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_aa709bfb2cfefc8bc2b936265d78ca493}\label{classimage__operations_1_1_image_ops_aa709bfb2cfefc8bc2b936265d78ca493}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!check\_compatibility@{check\_compatibility}}
+\index{check\_compatibility@{check\_compatibility}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{check\_compatibility()}{check\_compatibility()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+check\+\_\+compatibility (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Second check for image compatibility Override this function. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classimage__operations_1_1_conversion_ab0649e9ee3a7781bcd63a0a5d1514174}{image\+\_\+operations.\+Conversion}}, \mbox{\hyperlink{classimage__operations_1_1_segmentation_a6a81382cebfc6476b09d5b5ab754028a}{image\+\_\+operations.\+Segmentation}}, and \mbox{\hyperlink{classimage__operations_1_1_edge_detection_aa296a45efb9e36ff4e6ac247127646b0}{image\+\_\+operations.\+Edge\+Detection}}.
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_a4a1e62498f125629eafd834987c5ae7a}\label{classimage__operations_1_1_image_ops_a4a1e62498f125629eafd834987c5ae7a}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!first\_check@{first\_check}}
+\index{first\_check@{first\_check}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{first\_check()}{first\_check()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+first\+\_\+check (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+First check if image is compatible with image processing. 
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_ab692b77bfc8cb25f1fd88f96799cfd2e}\label{classimage__operations_1_1_image_ops_ab692b77bfc8cb25f1fd88f96799cfd2e}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!process\_image@{process\_image}}
+\index{process\_image@{process\_image}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{process\_image()}{process\_image()}}
+{\footnotesize\ttfamily def image\+\_\+operations.\+Image\+Ops.\+process\+\_\+image (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Image processing is done here Override this function. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classimage__operations_1_1_rgb_to_gray_a19efb95aafca2191d577e86b533a0fb8}{image\+\_\+operations.\+Rgb\+To\+Gray}}, \mbox{\hyperlink{classimage__operations_1_1_rgb_to_hsv_aad274fe89963300eab9763c2ce4a9c3f}{image\+\_\+operations.\+Rgb\+To\+Hsv}}, \mbox{\hyperlink{classimage__operations_1_1_multi_otsu_a0a91aac827de6b2137690af253347289}{image\+\_\+operations.\+Multi\+Otsu}}, \mbox{\hyperlink{classimage__operations_1_1_chan_vese_ad607b2dceda8f41f9170ca1a9bc69f0a}{image\+\_\+operations.\+Chan\+Vese}}, \mbox{\hyperlink{classimage__operations_1_1_morph_a_c_w_e_af14fff7d4a9ff32967e5515039911caa}{image\+\_\+operations.\+Morph\+ACWE}}, \mbox{\hyperlink{classimage__operations_1_1_morph_g_a_c_a9c0aa74118f8787b5d1a2ea06997e9db}{image\+\_\+operations.\+Morph\+GAC}}, \mbox{\hyperlink{classimage__operations_1_1_roberts_a1f8fb07e029d0ebd079097e43e630329}{image\+\_\+operations.\+Roberts}}, \mbox{\hyperlink{classimage__operations_1_1_sobel_afff022cc3a4af75220c9c01ae63d10af}{image\+\_\+operations.\+Sobel}}, \mbox{\hyperlink{classimage__operations_1_1_scharr_ab86188e9470691e27c989d43bb321914}{image\+\_\+operations.\+Scharr}}, and \mbox{\hyperlink{classimage__operations_1_1_prewitt_acf4121c0dc17313e7f716f4874445484}{image\+\_\+operations.\+Prewitt}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_acd95c28753c346411f916c817cc99c34}\label{classimage__operations_1_1_image_ops_acd95c28753c346411f916c817cc99c34}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!driver@{driver}}
+\index{driver@{driver}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{driver}{driver}}
+{\footnotesize\ttfamily image\+\_\+operations.\+Image\+Ops.\+driver}
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_a1706c80d3fddee549d1034d361ce3ce6}\label{classimage__operations_1_1_image_ops_a1706c80d3fddee549d1034d361ce3ce6}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!input\_image@{input\_image}}
+\index{input\_image@{input\_image}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{input\_image}{input\_image}}
+{\footnotesize\ttfamily image\+\_\+operations.\+Image\+Ops.\+input\+\_\+image}
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_afbe235794c301d19aebd02b41adc2787}\label{classimage__operations_1_1_image_ops_afbe235794c301d19aebd02b41adc2787}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!output\_image@{output\_image}}
+\index{output\_image@{output\_image}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{output\_image}{output\_image}}
+{\footnotesize\ttfamily image\+\_\+operations.\+Image\+Ops.\+output\+\_\+image}
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_acce9a6d09196be714c37a595bdab190a}\label{classimage__operations_1_1_image_ops_acce9a6d09196be714c37a595bdab190a}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!processed\_image@{processed\_image}}
+\index{processed\_image@{processed\_image}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{processed\_image}{processed\_image}}
+{\footnotesize\ttfamily image\+\_\+operations.\+Image\+Ops.\+processed\+\_\+image}
+
+\mbox{\Hypertarget{classimage__operations_1_1_image_ops_ad75dc1fc2e2d963363f7a6482624e58d}\label{classimage__operations_1_1_image_ops_ad75dc1fc2e2d963363f7a6482624e58d}} 
+\index{image\_operations.ImageOps@{image\_operations.ImageOps}!ui@{ui}}
+\index{ui@{ui}!image\_operations.ImageOps@{image\_operations.ImageOps}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily image\+\_\+operations.\+Image\+Ops.\+ui}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{image__operations_8py}{image\+\_\+operations.\+py}}\end{DoxyCompactItemize}

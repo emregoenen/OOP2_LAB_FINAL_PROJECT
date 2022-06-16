@@ -1,0 +1,490 @@
+\hypertarget{classdriver_1_1_driver}{}\doxysection{driver.\+Driver Class Reference}
+\label{classdriver_1_1_driver}\index{driver.Driver@{driver.Driver}}
+
+
+\mbox{\hyperlink{classdriver_1_1_driver}{Driver}} for Main\+Window This class should be created once(singleton)  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_aa5c6b09d468e72d169e074dc7be820b8}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdriver_1_1_driver_adaea9cca46950e40ae491fdc23b61ed7}{ui}}, \mbox{\hyperlink{classdriver_1_1_driver_a88fab3f3493eca62ac384baa55b66712}{Main\+Window}})
+\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a174f51454fb510cf537407dd43fe61f6}{open\+\_\+source}} (self)
+\begin{DoxyCompactList}\small\item\em Open input image ($\ast$.jpg, $\ast$.png) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a7918ddea7bed36ca10c58737d02eda61}{save\+\_\+output}} (self)
+\begin{DoxyCompactList}\small\item\em Save output image at current save path($\ast$.jpg, $\ast$.png) If not saved before, opens a dialog window, expecting user to select save path If saved before, takes save path as previous one Save output image as $\ast$.png or $\ast$.jpg. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_aa1f39a5279cb332036547882f4ba7a5b}{save\+\_\+as\+\_\+output}} (self)
+\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a4274ff0275a8c666ed12db3f20f60d2a}{export\+\_\+as\+\_\+source}} (self)
+\begin{DoxyCompactList}\small\item\em Opens a dialog window, expecting user to select save path If the input file is JPEG, save input label (image box on the left) with extension $\ast$.png If the input file is PNG, save input label (image box on the left) with extension $\ast$.jpg. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_ad04f17f4bbd49d5bb520ec88f1de67f8}{export\+\_\+as\+\_\+output}} (self)
+\begin{DoxyCompactList}\small\item\em Opens a dialog window, expecting user to select save path If the input file is JPEG, save output label (image box on the right) with extension $\ast$.png If the input file is PNG, save output label (image box on the right) with extension $\ast$.jpg. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_ac605c51e0fc3b759d312f38c96f419f2}{undo}} (self)
+\begin{DoxyCompactList}\small\item\em Pop the previous state from undo stack and push it to the redo stack Then, set the program\textquotesingle{}s state to top of undo stack. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a88e0bd3dce36933d2d12cccac6269d32}{redo}} (self)
+\begin{DoxyCompactList}\small\item\em Pop from the top of redo stack, then push it to the undo stack Set the current state of the program to popped state. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a87270b22dbb85591a773c5a7f33a9658}{undoable\+\_\+event\+\_\+happened}} (self)
+\begin{DoxyCompactList}\small\item\em Undoable event happened Save the current state of the program and push it to undo stack Clear the redo stack. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a00d5556f0c89a47a46393ce10267eb73}{update\+\_\+io\+\_\+labels}} (self)
+\begin{DoxyCompactList}\small\item\em Update input and output files from /temp folder. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a0c31cd581d945a3cb8ca34fa1169aaa6}{swap\+\_\+input\+\_\+output}} (self)
+\begin{DoxyCompactList}\small\item\em Swap input and output images, update input output labels. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a0e5c2f811bd72151728315a1f4ac8fe6}{clear\+\_\+source}} (self)
+\begin{DoxyCompactList}\small\item\em Clear the input image and label. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a7427b766333bff146e40da4e1501a4af}{clear\+\_\+output}} (self)
+\begin{DoxyCompactList}\small\item\em Clear the output image and label. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a09b37452466d1609e480e4d2de3ae684}{check\+\_\+export\+\_\+as\+\_\+buttons}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of export as buttons. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_abb5b20a0162111adf128142fa18b1074}{check\+\_\+save\+\_\+buttons}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of save button. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a12ac19f41cbd806e818323ae2fc941bb}{check\+\_\+clear\+\_\+buttons}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of clear button. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_add412b402e0868ec32f6871efab18ddf}{check\+\_\+undo\+\_\+redo\+\_\+buttons}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of undo redo buttons. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_afc7a1ddef98ce5afa68b8122ae84147c}{check\+\_\+swap\+\_\+button}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of swap button. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a683b10bf00c78598859b848f7147f45c}{check\+\_\+functionality\+\_\+buttons}} (self)
+\begin{DoxyCompactList}\small\item\em Enable disable check of image processing buttons. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a5719756aac6327060d831cd5c2b0814a}{rgb\+\_\+to\+\_\+gray}} (self)
+\begin{DoxyCompactList}\small\item\em Convert RGB image to grayscale image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_afef565fde335e00a608c992005d7dd14}{rgb\+\_\+to\+\_\+hsv}} (self)
+\begin{DoxyCompactList}\small\item\em Convert RGB image to HSV. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a444132ef10180dccdbd32fa71ff5a90c}{multi\+\_\+otsu\+\_\+thresholding}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Multi\+Otsu segmentation to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a3ff3c0058d24e52ce99f417ff6d8b0e7}{chan\+\_\+vese\+\_\+segmentation}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Chan\+Vese segmentation to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a030d5fb5019eae2d16901977c982c880}{morphological\+\_\+snakes\+\_\+\+GAC}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Morph\+Snakes(\+GAC) segmentation to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a978aa2c0d17260b32825e2dec8df42ea}{morphological\+\_\+snakes\+\_\+\+ACWE}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Morph\+Snakes(\+ACWE) segmentation to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a5f30f0a167dc861aa4e6b41aaf015c94}{roberts}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Roberts Edge Detection to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a7ff252d10f8e6e7e9110872099343eea}{sobel}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Sobel Edge Detection to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_aa3f9e07968302b8ccd149a230bf538c8}{scharr}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Scharr Edge Detection to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a0a8bde78c67f954f16c5268180f14f21}{prewitt}} (self)
+\begin{DoxyCompactList}\small\item\em Apply Prewitt Edge Detection to image. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a871e76b814a551b4af25719753083d23}{close\+Event}} (self, event)
+\begin{DoxyCompactList}\small\item\em If user presses the red exit button on the top right If there are unsaved changes ask him to whether he wants to save them Then ask \char`\"{}\+Are you sure to quit\char`\"{} If answer is \char`\"{}\+Yes\char`\"{} quit, if not do nothing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_ae1a7612a01b1cf6f7a41846592643071}{exit}} (self)
+\begin{DoxyCompactList}\small\item\em Terminate the program If user presses the red exit button on the top right If there are unsaved changes ask him to whether he wants to save them Then ask \char`\"{}\+Are you sure to quit\char`\"{} If answer is \char`\"{}\+Yes\char`\"{} quit, if not do nothing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a21323273d06ef1cec26735431914dacf}{setup\+\_\+icons}} (self)
+\begin{DoxyCompactList}\small\item\em Put icons on buttons. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classdriver_1_1_driver_a6f018109bad475563c7a691429160e79}{setup\+\_\+signal\+\_\+slots}} (self)
+\begin{DoxyCompactList}\small\item\em Connect signals with slots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a88fab3f3493eca62ac384baa55b66712}{Main\+Window}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_adaea9cca46950e40ae491fdc23b61ed7}{ui}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a99179112878c6c09bd463a392953507f}{input\+\_\+image}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a07232f9719d15e7a653b0e86d724f088}{output\+\_\+image}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a406e4ac4140a0b4d9436b5107fc17111}{save\+\_\+path}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a4ecbbc5bebb2e6b5fac50fef96f87a92}{undo\+\_\+stack}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a960d9c02ed71d20ae36faa01e223f1af}{redo\+\_\+stack}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a4c6ed49d37886f9954fa25c9ecbc5e75}{file\+\_\+extension}}
+\item 
+\mbox{\hyperlink{classdriver_1_1_driver_a8cb673534d9c782b6dd161a731f5e0cd}{file\+\_\+types}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classdriver_1_1_driver}{Driver}} for Main\+Window This class should be created once(singleton) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classdriver_1_1_driver_aa5c6b09d468e72d169e074dc7be820b8}\label{classdriver_1_1_driver_aa5c6b09d468e72d169e074dc7be820b8}} 
+\index{driver.Driver@{driver.Driver}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{ui,  }\item[{}]{Main\+Window }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classdriver_1_1_driver_a3ff3c0058d24e52ce99f417ff6d8b0e7}\label{classdriver_1_1_driver_a3ff3c0058d24e52ce99f417ff6d8b0e7}} 
+\index{driver.Driver@{driver.Driver}!chan\_vese\_segmentation@{chan\_vese\_segmentation}}
+\index{chan\_vese\_segmentation@{chan\_vese\_segmentation}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{chan\_vese\_segmentation()}{chan\_vese\_segmentation()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+chan\+\_\+vese\+\_\+segmentation (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Chan\+Vese segmentation to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a12ac19f41cbd806e818323ae2fc941bb}\label{classdriver_1_1_driver_a12ac19f41cbd806e818323ae2fc941bb}} 
+\index{driver.Driver@{driver.Driver}!check\_clear\_buttons@{check\_clear\_buttons}}
+\index{check\_clear\_buttons@{check\_clear\_buttons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_clear\_buttons()}{check\_clear\_buttons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+clear\+\_\+buttons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of clear button. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a09b37452466d1609e480e4d2de3ae684}\label{classdriver_1_1_driver_a09b37452466d1609e480e4d2de3ae684}} 
+\index{driver.Driver@{driver.Driver}!check\_export\_as\_buttons@{check\_export\_as\_buttons}}
+\index{check\_export\_as\_buttons@{check\_export\_as\_buttons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_export\_as\_buttons()}{check\_export\_as\_buttons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+export\+\_\+as\+\_\+buttons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of export as buttons. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a683b10bf00c78598859b848f7147f45c}\label{classdriver_1_1_driver_a683b10bf00c78598859b848f7147f45c}} 
+\index{driver.Driver@{driver.Driver}!check\_functionality\_buttons@{check\_functionality\_buttons}}
+\index{check\_functionality\_buttons@{check\_functionality\_buttons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_functionality\_buttons()}{check\_functionality\_buttons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+functionality\+\_\+buttons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of image processing buttons. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_abb5b20a0162111adf128142fa18b1074}\label{classdriver_1_1_driver_abb5b20a0162111adf128142fa18b1074}} 
+\index{driver.Driver@{driver.Driver}!check\_save\_buttons@{check\_save\_buttons}}
+\index{check\_save\_buttons@{check\_save\_buttons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_save\_buttons()}{check\_save\_buttons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+save\+\_\+buttons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of save button. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_afc7a1ddef98ce5afa68b8122ae84147c}\label{classdriver_1_1_driver_afc7a1ddef98ce5afa68b8122ae84147c}} 
+\index{driver.Driver@{driver.Driver}!check\_swap\_button@{check\_swap\_button}}
+\index{check\_swap\_button@{check\_swap\_button}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_swap\_button()}{check\_swap\_button()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+swap\+\_\+button (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of swap button. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_add412b402e0868ec32f6871efab18ddf}\label{classdriver_1_1_driver_add412b402e0868ec32f6871efab18ddf}} 
+\index{driver.Driver@{driver.Driver}!check\_undo\_redo\_buttons@{check\_undo\_redo\_buttons}}
+\index{check\_undo\_redo\_buttons@{check\_undo\_redo\_buttons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{check\_undo\_redo\_buttons()}{check\_undo\_redo\_buttons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+check\+\_\+undo\+\_\+redo\+\_\+buttons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Enable disable check of undo redo buttons. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a7427b766333bff146e40da4e1501a4af}\label{classdriver_1_1_driver_a7427b766333bff146e40da4e1501a4af}} 
+\index{driver.Driver@{driver.Driver}!clear\_output@{clear\_output}}
+\index{clear\_output@{clear\_output}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{clear\_output()}{clear\_output()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+clear\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Clear the output image and label. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a0e5c2f811bd72151728315a1f4ac8fe6}\label{classdriver_1_1_driver_a0e5c2f811bd72151728315a1f4ac8fe6}} 
+\index{driver.Driver@{driver.Driver}!clear\_source@{clear\_source}}
+\index{clear\_source@{clear\_source}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{clear\_source()}{clear\_source()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+clear\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Clear the input image and label. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a871e76b814a551b4af25719753083d23}\label{classdriver_1_1_driver_a871e76b814a551b4af25719753083d23}} 
+\index{driver.Driver@{driver.Driver}!closeEvent@{closeEvent}}
+\index{closeEvent@{closeEvent}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{closeEvent()}{closeEvent()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+close\+Event (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{event }\end{DoxyParamCaption})}
+
+
+
+If user presses the red exit button on the top right If there are unsaved changes ask him to whether he wants to save them Then ask \char`\"{}\+Are you sure to quit\char`\"{} If answer is \char`\"{}\+Yes\char`\"{} quit, if not do nothing. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_ae1a7612a01b1cf6f7a41846592643071}\label{classdriver_1_1_driver_ae1a7612a01b1cf6f7a41846592643071}} 
+\index{driver.Driver@{driver.Driver}!exit@{exit}}
+\index{exit@{exit}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{exit()}{exit()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+exit (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Terminate the program If user presses the red exit button on the top right If there are unsaved changes ask him to whether he wants to save them Then ask \char`\"{}\+Are you sure to quit\char`\"{} If answer is \char`\"{}\+Yes\char`\"{} quit, if not do nothing. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_ad04f17f4bbd49d5bb520ec88f1de67f8}\label{classdriver_1_1_driver_ad04f17f4bbd49d5bb520ec88f1de67f8}} 
+\index{driver.Driver@{driver.Driver}!export\_as\_output@{export\_as\_output}}
+\index{export\_as\_output@{export\_as\_output}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{export\_as\_output()}{export\_as\_output()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+export\+\_\+as\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Opens a dialog window, expecting user to select save path If the input file is JPEG, save output label (image box on the right) with extension $\ast$.png If the input file is PNG, save output label (image box on the right) with extension $\ast$.jpg. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a4274ff0275a8c666ed12db3f20f60d2a}\label{classdriver_1_1_driver_a4274ff0275a8c666ed12db3f20f60d2a}} 
+\index{driver.Driver@{driver.Driver}!export\_as\_source@{export\_as\_source}}
+\index{export\_as\_source@{export\_as\_source}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{export\_as\_source()}{export\_as\_source()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+export\+\_\+as\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Opens a dialog window, expecting user to select save path If the input file is JPEG, save input label (image box on the left) with extension $\ast$.png If the input file is PNG, save input label (image box on the left) with extension $\ast$.jpg. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a978aa2c0d17260b32825e2dec8df42ea}\label{classdriver_1_1_driver_a978aa2c0d17260b32825e2dec8df42ea}} 
+\index{driver.Driver@{driver.Driver}!morphological\_snakes\_ACWE@{morphological\_snakes\_ACWE}}
+\index{morphological\_snakes\_ACWE@{morphological\_snakes\_ACWE}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{morphological\_snakes\_ACWE()}{morphological\_snakes\_ACWE()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+morphological\+\_\+snakes\+\_\+\+ACWE (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Morph\+Snakes(\+ACWE) segmentation to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a030d5fb5019eae2d16901977c982c880}\label{classdriver_1_1_driver_a030d5fb5019eae2d16901977c982c880}} 
+\index{driver.Driver@{driver.Driver}!morphological\_snakes\_GAC@{morphological\_snakes\_GAC}}
+\index{morphological\_snakes\_GAC@{morphological\_snakes\_GAC}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{morphological\_snakes\_GAC()}{morphological\_snakes\_GAC()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+morphological\+\_\+snakes\+\_\+\+GAC (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Morph\+Snakes(\+GAC) segmentation to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a444132ef10180dccdbd32fa71ff5a90c}\label{classdriver_1_1_driver_a444132ef10180dccdbd32fa71ff5a90c}} 
+\index{driver.Driver@{driver.Driver}!multi\_otsu\_thresholding@{multi\_otsu\_thresholding}}
+\index{multi\_otsu\_thresholding@{multi\_otsu\_thresholding}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{multi\_otsu\_thresholding()}{multi\_otsu\_thresholding()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+multi\+\_\+otsu\+\_\+thresholding (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Multi\+Otsu segmentation to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a174f51454fb510cf537407dd43fe61f6}\label{classdriver_1_1_driver_a174f51454fb510cf537407dd43fe61f6}} 
+\index{driver.Driver@{driver.Driver}!open\_source@{open\_source}}
+\index{open\_source@{open\_source}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{open\_source()}{open\_source()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+open\+\_\+source (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Open input image ($\ast$.jpg, $\ast$.png) 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a0a8bde78c67f954f16c5268180f14f21}\label{classdriver_1_1_driver_a0a8bde78c67f954f16c5268180f14f21}} 
+\index{driver.Driver@{driver.Driver}!prewitt@{prewitt}}
+\index{prewitt@{prewitt}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{prewitt()}{prewitt()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+prewitt (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Prewitt Edge Detection to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a88e0bd3dce36933d2d12cccac6269d32}\label{classdriver_1_1_driver_a88e0bd3dce36933d2d12cccac6269d32}} 
+\index{driver.Driver@{driver.Driver}!redo@{redo}}
+\index{redo@{redo}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{redo()}{redo()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+redo (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Pop from the top of redo stack, then push it to the undo stack Set the current state of the program to popped state. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a5719756aac6327060d831cd5c2b0814a}\label{classdriver_1_1_driver_a5719756aac6327060d831cd5c2b0814a}} 
+\index{driver.Driver@{driver.Driver}!rgb\_to\_gray@{rgb\_to\_gray}}
+\index{rgb\_to\_gray@{rgb\_to\_gray}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{rgb\_to\_gray()}{rgb\_to\_gray()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+rgb\+\_\+to\+\_\+gray (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Convert RGB image to grayscale image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_afef565fde335e00a608c992005d7dd14}\label{classdriver_1_1_driver_afef565fde335e00a608c992005d7dd14}} 
+\index{driver.Driver@{driver.Driver}!rgb\_to\_hsv@{rgb\_to\_hsv}}
+\index{rgb\_to\_hsv@{rgb\_to\_hsv}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{rgb\_to\_hsv()}{rgb\_to\_hsv()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+rgb\+\_\+to\+\_\+hsv (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Convert RGB image to HSV. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a5f30f0a167dc861aa4e6b41aaf015c94}\label{classdriver_1_1_driver_a5f30f0a167dc861aa4e6b41aaf015c94}} 
+\index{driver.Driver@{driver.Driver}!roberts@{roberts}}
+\index{roberts@{roberts}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{roberts()}{roberts()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+roberts (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Roberts Edge Detection to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_aa1f39a5279cb332036547882f4ba7a5b}\label{classdriver_1_1_driver_aa1f39a5279cb332036547882f4ba7a5b}} 
+\index{driver.Driver@{driver.Driver}!save\_as\_output@{save\_as\_output}}
+\index{save\_as\_output@{save\_as\_output}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{save\_as\_output()}{save\_as\_output()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+save\+\_\+as\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a7918ddea7bed36ca10c58737d02eda61}\label{classdriver_1_1_driver_a7918ddea7bed36ca10c58737d02eda61}} 
+\index{driver.Driver@{driver.Driver}!save\_output@{save\_output}}
+\index{save\_output@{save\_output}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{save\_output()}{save\_output()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+save\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Save output image at current save path($\ast$.jpg, $\ast$.png) If not saved before, opens a dialog window, expecting user to select save path If saved before, takes save path as previous one Save output image as $\ast$.png or $\ast$.jpg. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_aa3f9e07968302b8ccd149a230bf538c8}\label{classdriver_1_1_driver_aa3f9e07968302b8ccd149a230bf538c8}} 
+\index{driver.Driver@{driver.Driver}!scharr@{scharr}}
+\index{scharr@{scharr}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{scharr()}{scharr()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+scharr (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Scharr Edge Detection to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a21323273d06ef1cec26735431914dacf}\label{classdriver_1_1_driver_a21323273d06ef1cec26735431914dacf}} 
+\index{driver.Driver@{driver.Driver}!setup\_icons@{setup\_icons}}
+\index{setup\_icons@{setup\_icons}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{setup\_icons()}{setup\_icons()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+setup\+\_\+icons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Put icons on buttons. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a6f018109bad475563c7a691429160e79}\label{classdriver_1_1_driver_a6f018109bad475563c7a691429160e79}} 
+\index{driver.Driver@{driver.Driver}!setup\_signal\_slots@{setup\_signal\_slots}}
+\index{setup\_signal\_slots@{setup\_signal\_slots}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{setup\_signal\_slots()}{setup\_signal\_slots()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+setup\+\_\+signal\+\_\+slots (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Connect signals with slots. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a7ff252d10f8e6e7e9110872099343eea}\label{classdriver_1_1_driver_a7ff252d10f8e6e7e9110872099343eea}} 
+\index{driver.Driver@{driver.Driver}!sobel@{sobel}}
+\index{sobel@{sobel}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{sobel()}{sobel()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+sobel (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Apply Sobel Edge Detection to image. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a0c31cd581d945a3cb8ca34fa1169aaa6}\label{classdriver_1_1_driver_a0c31cd581d945a3cb8ca34fa1169aaa6}} 
+\index{driver.Driver@{driver.Driver}!swap\_input\_output@{swap\_input\_output}}
+\index{swap\_input\_output@{swap\_input\_output}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{swap\_input\_output()}{swap\_input\_output()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+swap\+\_\+input\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Swap input and output images, update input output labels. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_ac605c51e0fc3b759d312f38c96f419f2}\label{classdriver_1_1_driver_ac605c51e0fc3b759d312f38c96f419f2}} 
+\index{driver.Driver@{driver.Driver}!undo@{undo}}
+\index{undo@{undo}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{undo()}{undo()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+undo (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Pop the previous state from undo stack and push it to the redo stack Then, set the program\textquotesingle{}s state to top of undo stack. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a87270b22dbb85591a773c5a7f33a9658}\label{classdriver_1_1_driver_a87270b22dbb85591a773c5a7f33a9658}} 
+\index{driver.Driver@{driver.Driver}!undoable\_event\_happened@{undoable\_event\_happened}}
+\index{undoable\_event\_happened@{undoable\_event\_happened}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{undoable\_event\_happened()}{undoable\_event\_happened()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+undoable\+\_\+event\+\_\+happened (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Undoable event happened Save the current state of the program and push it to undo stack Clear the redo stack. 
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a00d5556f0c89a47a46393ce10267eb73}\label{classdriver_1_1_driver_a00d5556f0c89a47a46393ce10267eb73}} 
+\index{driver.Driver@{driver.Driver}!update\_io\_labels@{update\_io\_labels}}
+\index{update\_io\_labels@{update\_io\_labels}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{update\_io\_labels()}{update\_io\_labels()}}
+{\footnotesize\ttfamily def driver.\+Driver.\+update\+\_\+io\+\_\+labels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Update input and output files from /temp folder. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classdriver_1_1_driver_a4c6ed49d37886f9954fa25c9ecbc5e75}\label{classdriver_1_1_driver_a4c6ed49d37886f9954fa25c9ecbc5e75}} 
+\index{driver.Driver@{driver.Driver}!file\_extension@{file\_extension}}
+\index{file\_extension@{file\_extension}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{file\_extension}{file\_extension}}
+{\footnotesize\ttfamily driver.\+Driver.\+file\+\_\+extension}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a8cb673534d9c782b6dd161a731f5e0cd}\label{classdriver_1_1_driver_a8cb673534d9c782b6dd161a731f5e0cd}} 
+\index{driver.Driver@{driver.Driver}!file\_types@{file\_types}}
+\index{file\_types@{file\_types}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{file\_types}{file\_types}}
+{\footnotesize\ttfamily driver.\+Driver.\+file\+\_\+types}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a99179112878c6c09bd463a392953507f}\label{classdriver_1_1_driver_a99179112878c6c09bd463a392953507f}} 
+\index{driver.Driver@{driver.Driver}!input\_image@{input\_image}}
+\index{input\_image@{input\_image}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{input\_image}{input\_image}}
+{\footnotesize\ttfamily driver.\+Driver.\+input\+\_\+image}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a88fab3f3493eca62ac384baa55b66712}\label{classdriver_1_1_driver_a88fab3f3493eca62ac384baa55b66712}} 
+\index{driver.Driver@{driver.Driver}!MainWindow@{MainWindow}}
+\index{MainWindow@{MainWindow}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{MainWindow}{MainWindow}}
+{\footnotesize\ttfamily driver.\+Driver.\+Main\+Window}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a07232f9719d15e7a653b0e86d724f088}\label{classdriver_1_1_driver_a07232f9719d15e7a653b0e86d724f088}} 
+\index{driver.Driver@{driver.Driver}!output\_image@{output\_image}}
+\index{output\_image@{output\_image}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{output\_image}{output\_image}}
+{\footnotesize\ttfamily driver.\+Driver.\+output\+\_\+image}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a960d9c02ed71d20ae36faa01e223f1af}\label{classdriver_1_1_driver_a960d9c02ed71d20ae36faa01e223f1af}} 
+\index{driver.Driver@{driver.Driver}!redo\_stack@{redo\_stack}}
+\index{redo\_stack@{redo\_stack}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{redo\_stack}{redo\_stack}}
+{\footnotesize\ttfamily driver.\+Driver.\+redo\+\_\+stack}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a406e4ac4140a0b4d9436b5107fc17111}\label{classdriver_1_1_driver_a406e4ac4140a0b4d9436b5107fc17111}} 
+\index{driver.Driver@{driver.Driver}!save\_path@{save\_path}}
+\index{save\_path@{save\_path}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{save\_path}{save\_path}}
+{\footnotesize\ttfamily driver.\+Driver.\+save\+\_\+path}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_adaea9cca46950e40ae491fdc23b61ed7}\label{classdriver_1_1_driver_adaea9cca46950e40ae491fdc23b61ed7}} 
+\index{driver.Driver@{driver.Driver}!ui@{ui}}
+\index{ui@{ui}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily driver.\+Driver.\+ui}
+
+\mbox{\Hypertarget{classdriver_1_1_driver_a4ecbbc5bebb2e6b5fac50fef96f87a92}\label{classdriver_1_1_driver_a4ecbbc5bebb2e6b5fac50fef96f87a92}} 
+\index{driver.Driver@{driver.Driver}!undo\_stack@{undo\_stack}}
+\index{undo\_stack@{undo\_stack}!driver.Driver@{driver.Driver}}
+\doxysubsubsection{\texorpdfstring{undo\_stack}{undo\_stack}}
+{\footnotesize\ttfamily driver.\+Driver.\+undo\+\_\+stack}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{driver_8py}{driver.\+py}}\end{DoxyCompactItemize}
